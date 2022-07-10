@@ -3,12 +3,17 @@ package com.keywords.services;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+@Service
 public class ProccessFileService {
-    public void readPDF() {
-        try (PDDocument document = PDDocument.load(new File("/path-to/abc.pdf"))) {
+    @Value("${file.upload.location}")
+    private String path;
+    public void readPDF(String filename) {
+        try (PDDocument document = PDDocument.load(new File(path + "/" + filename))) {
 
             document.getClass();
 
